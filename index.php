@@ -5,6 +5,7 @@ include('route/route.controller.php');
 <html>
 <head>
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="container">

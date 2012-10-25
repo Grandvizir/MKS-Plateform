@@ -11,9 +11,23 @@ $daoFactory = IDaoFactory::getInstance();
 $productDAO = $daoFactory->getProductDAO();
 $data = $productDAO->getAllProduct();
 ?>
-		<ul class="breadcrumb">
+<div class="row">
+     <div class="span5"><ul class="breadcrumb" style="margin-top:20px;">
 	  <li class="active"><a href="index.php">Home</a> <span class="divider">/</span></li>
-	</ul>
+	</ul></div>
+     <div class="span7">
+	     <div class="legend alert alert-info">
+	      <a class="close" id="legend" data-dismiss="alert" href="#">&times;</a>
+		 	<ul>
+				<li><i class="icon-time icon-white"></i> Priority :</li>
+				<li><i class="icon-check icon-white"></i> Estimate of Value :</li>
+				<li><i class="icon-screenshot icon-white"></i> Initial estimate of effort :</li>
+				<li><i class="icon-ok-circle icon-white"></i> Remaining :</li>
+
+		 </div>
+	 </div>
+   </div>
+
 		<h3>Front office</h3>
 		<p><u>Product Backlog</u></p>
 		<table class="table table-bordered">
@@ -80,3 +94,7 @@ $data = $productDAO->getAllProduct();
 		<script type="text/javascript" src="lib/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="lib/js/jquery.easing.1.3.js"></script>
 		<script type="text/javascript" src="lib/js/agile.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(".alert").alert();
+</script>

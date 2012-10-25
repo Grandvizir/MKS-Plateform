@@ -28,23 +28,38 @@ else
 	$i = false;
 }
 ?>
-		<ul class="breadcrumb">
+<div class="row">
+     <div class="span5"><ul class="breadcrumb"  style="margin-top:20px;">
 		 <li><a href="index.php">Home</a> <span class="divider">/</span></li>
 		  <li><a href="index.php?page=sprint">Sprint view</a> <span class="divider">/</span></li>
 		  <li class="active"><?php if($i){ echo $data[0]->Product->Item;} ?></li>
-		</ul>
+		</ul></div>
+     <div class="span7">
+     	  <div class="legend alert alert-info">
+	      <a class="close" id="legend" data-dismiss="alert" href="#">&times;</a>
+		 	<ul>
+				<li><i class="icon-time icon-white"></i> Priority :</li>
+				<li><i class="icon-check icon-white"></i> Estimate of Value :</li>
+				<li><i class="icon-screenshot icon-white"></i> Initial estimate of effort :</li>
+				<li><i class="icon-ok-circle icon-white"></i> Remaining :</li>
+
+		 </div>
+	 </div>
+   </div>
 		<p><u>Sprint Backlog <?php if($i){echo 'de "<strong>'.$data[0]->Product->Item.'</strong>"';}else echo '<strong>all</strong>'; ?></u></p>
 		<table class="table table-bordered">
 			<tr>
-				<th>BackLog product item</th>
+				<?php if($i){echo '	<th>BackLog product item</th>';}?>
+
 				<th>Sprint task</th>
 				<th>Volunteer</th>
+				<?php if(!$i){echo '<th>Product Item</th>';}?>
 				<th>Initial estimate of effort</th>
 				<th>Task actions</th>
 			</tr>
 
 			<tr>
-				<td rowspan="<?php echo count($data) +1; ?>"><?php echo $data[0]->Product->Item; ?></td>
+				<?php if($i){ $var = count($data) + 1; echo '<td rowspan="'.$var.'">'.$data[0]->Product->Item.'</td>';} ?></td>
 			</tr>
 			<?php //'.$obj->User->getUserName().'
 				foreach($data as $obj){ ?>
@@ -53,6 +68,7 @@ else
 				<td ><?php 	foreach ($UserDAO->getAllUserByTaskID($obj->Task->TaskID) as $model) {
 					echo '<a href="#"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
 				} ?></td>
+				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
 				<td><?php echo $obj->Task->TaskEffor ?></td>
 				<td><a href = "edit_task.html"> Edit </a> <a href = "#"> Delete </a></td>
 				</tr>
@@ -103,5 +119,5 @@ $('#tooltip').tooltip('hide');
 $("#multiselect-demo").multiselect({
 	selectedText: "# User(s)"
 });
-
+$(".alert").alert();
 </script>

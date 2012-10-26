@@ -79,4 +79,25 @@ if(!empty($_POST['actionPostEditProduct']) && $_POST['actionPostEditProduct'] ==
 
 
 }
+if(!empty($_POST['actionPostEditTask']) && $_POST['actionPostEditTask'] == 1){
+	if(!empty($_POST['description']) && !empty($_POST['effort'])
+		&& !empty($_POST['user']) && !empty($_POST['TaskID']) && !empty($_POST['SprintID']))
+	{
+		include('../model/Model.php');
+		include('../dao/factory/IDaoFactory.php');
+
+		$daoFactory = IDaoFactory::getInstance();
+		$taskDAO = $daoFactory->getTaskDAO();
+
+		$model->Task->Description = $_POST['description'];
+		$model->Task->TaskEffor = $_POST['effort'];
+		$model->ArrayUser = $_POST['user'];
+		$model->Task->TaskID = $_POST['TaskID'];
+		$model->Sprint->SprintID = $_POST['SprintID'];
+		$taskDAO->updateTaskByID($model);
+		header("location:../index.php?page=sprint");
+	}
+	else
+		header("location:../index.php?page=edit-task&id=".$_POST['TaskID']);
+}
 ?>

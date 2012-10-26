@@ -20,7 +20,7 @@ else
 ?>
 	<ul class="breadcrumb">
 	  <li><a href="index.php">Home</a> <span class="divider">/</span></li>
-	  <li class="active">Item edition</li>
+	  <li class="active">Product edition</li>
 	</ul>
 	<tr>
 						<td><label>Product</label></td>

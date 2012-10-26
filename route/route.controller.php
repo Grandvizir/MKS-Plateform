@@ -10,6 +10,10 @@ if(!empty($_GET['page']) && $_GET['page'] != null)
 		case 'edit-item':
 			$path = 'edit_item.php';
 			break;
+		case 'edit-task':
+			$path = 'edit_task.php';
+			break;
+
 
 
 	}

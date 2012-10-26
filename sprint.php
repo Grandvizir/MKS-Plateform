@@ -17,8 +17,7 @@ if(!empty($_GET['id']) && $_GET['id'] != NULL)
 	$id = $_GET['id'];
 	$data = $ModelDAO->getAllDependencyByProductID($id);
 	$i = true;
-	if(empty($data))
-	{
+	if(empty($data)){
 		header("location:index.php");
 	}
 }
@@ -69,8 +68,8 @@ else
 					echo '<a href="#"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
 				} ?></td>
 				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
-				<td><?php echo $obj->Task->TaskEffor ?></td>
-				<td><a href = "edit_task.html"> Edit </a> <a href = "#"> Delete </a></td>
+				<td><?php echo $obj->Task->TaskEffor; ?></td>
+				<td><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Edit </a> <a href = "#"> Delete </a></td>
 				</tr>
 			<?php }	?>
 		</table>
@@ -99,6 +98,8 @@ else
 					<tr>
 						<input type="hidden"  name="actionPostAddTask" value="1"/>
 						<input type="hidden"  name="SprintID" value="<?php echo $data[0]->Sprint->SprintID; ?>"/>
+						<input type="hidden"  name="product" value="<?php echo $data[0]->Product->ProductID; ?>"/>
+
 						<br/>
 						<td><button type="submit" class="btn btn-primary">Valider mes infos</button></td>
 					</tr>
@@ -109,7 +110,6 @@ else
 <script type="text/javascript" src="lib/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="lib/js/agile.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="lib/select/jquery-ui-1.9.0.custom.js"></script>
 <script src="lib/select/script.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>

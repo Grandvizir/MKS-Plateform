@@ -42,14 +42,15 @@ $data = $productDAO->getAllProduct();
 			</tr>
 			<?php foreach($data as $obj)
 			{
-				echo '<tr>
-				<td><a href = "?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>
-				<td>'.$obj->Product->Detail.'</td>
-				<td>'.$obj->Product->Priority.'</td>
-				<td>'.$obj->Product->EstimateValue.'</td>
-				<td>'.$obj->Product->Effor.'</td>
-				<td>'.$obj->Product->Remaining.'</td>
-				<td><a href="?page=edit-item&id='.$obj->Product->ProductID.'"> Edit </a> <a href="#">Delete</a></td>
+				echo '
+				<tr>
+					<td><a href = "?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>
+					<td>'.$obj->Product->Detail.'</td>
+					<td>'.$obj->Product->Priority.'</td>
+					<td>'.$obj->Product->EstimateValue.'</td>
+					<td>'.$obj->Product->Effor.'</td>
+					<td>'.$obj->Product->Remaining.'</td>
+					<td><a href="?page=edit-item&id='.$obj->Product->ProductID.'"> Edit </a> <a href="#">Delete</a></td>
 				</tr>';
 			}
 			?>

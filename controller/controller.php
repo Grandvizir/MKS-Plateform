@@ -84,6 +84,8 @@ if(!empty($_POST['actionPostEditTask']) && $_POST['actionPostEditTask'] == 1){
 		&& !empty($_POST['user']) && !empty($_POST['TaskID']) && !empty($_POST['SprintID']))
 	{
 		include('../model/Model.php');
+		include('../model/Task.php');
+		include('../model/User.php');
 		include('../dao/factory/IDaoFactory.php');
 
 		$daoFactory = IDaoFactory::getInstance();

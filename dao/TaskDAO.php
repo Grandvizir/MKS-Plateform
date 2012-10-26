@@ -15,8 +15,8 @@ class TaskDAO
 											WHERE TaskID = :tid
 											AND `task`.SprintID = `sprint`.SprintID";
 
-	private static $QUERY_UPDATE_TASkBYI = "UPDATE task SET TDescription = :tdescription, TEffort = :teffort
-											where TaskID=:tid";
+	private static $QUERY_UPDATE_TASkBYID = "UPDATE task SET TDescription = :tdescription, TEffort = :teffort
+											where TaskID = :tid";
 	private static $QUERY_DELETE_USER_RELATION = "DELETE FROM usertask where SprintID = :sid
 													AND UserID = :uid
 													";
@@ -71,30 +71,31 @@ class TaskDAO
 
 		$con->beginTransaction();
 
-		$query = $con->prepare(self::$QUERY_UPDATE_TASkBYI);
+		$query = $con->prepare(self::$QUERY_UPDATE_TASkBYID);
 		$query->execute(array(
 						'tdescription' => $model->Task->Description,
 						'teffort' => $model->Task->TaskEffor,
 						'tid' => $model->Task->TaskID
 						));
-		$currentUser = $UserDAO->getAllUserByTaskID($model->Task->TaskID);
 
-		var_dump($currentUser);
-		exit;
+
+		$daoFactory = IDaoFactory::getInstance();
+		$UserDAO = $daoFactory->getUserDAO();
+		$currentUser = $UserDAO->getAllUserByTaskID($model->Task->TaskID);
 
 		foreach ($currentUser as $u) {
 		$firstStep = $con->prepare(self::$QUERY_DELETE_USER_RELATION);
 		$firstStep->execute(array(
 			'sid' => $model->Sprint->SprintID,
-			'uid' => $u
+			'uid' => $u->User->getUserID()
 				));
 		}
-		foreach ($model->ArrayUser as $u) {
+		foreach ($model->ArrayUser as $i) {
 
 			$secondStep = $con->prepare(self::$QUERY_RELATION_USER);
 			$secondStep->execute(array(
 					'sid' => $model->Sprint->SprintID,
-					'uid' => $u
+					'uid' => $i
 					));
 		}
 		$con->commit();

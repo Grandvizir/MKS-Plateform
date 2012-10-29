@@ -18,7 +18,7 @@ if(!empty($_GET['id']) && $_GET['id'] != NULL)
 	$data = $ModelDAO->getAllDependencyByProductID($id);
 	$i = true;
 	if(empty($data)){
-		header("location:index.php");
+		header("location:index.php?page=sprint");
 	}
 }
 else

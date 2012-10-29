@@ -32,49 +32,11 @@ else
 		 <li><a href="index.php">Home</a> <span class="divider">/</span></li>
 		  <li><a href="index.php?page=sprint">Sprint view</a> <span class="divider">/</span></li>
 		  <li class="active"><?php if($i){ echo $data[0]->Product->Item;} ?></li>
-		</ul></div>
-     <div class="span7">
-     	  <div class="legend alert alert-info">
-	      <a class="close" id="legend" data-dismiss="alert" href="#">&times;</a>
-		 	<ul>
-				<li><i class="icon-time icon-white"></i> Priority :</li>
-				<li><i class="icon-check icon-white"></i> Estimate of Value :</li>
-				<li><i class="icon-screenshot icon-white"></i> Initial estimate of effort :</li>
-				<li><i class="icon-ok-circle icon-white"></i> Remaining :</li>
-
-		 </div>
-	 </div>
-   </div>
-		<p><u>Sprint Backlog <?php if($i){echo 'de "<strong>'.$data[0]->Product->Item.'</strong>"';}else echo '<strong>all</strong>'; ?></u></p>
-		<table class="table table-bordered">
-			<tr>
-				<?php if($i){echo '	<th>BackLog product item</th>';}?>
-
-				<th>Sprint task</th>
-				<th>Volunteer</th>
-				<?php if(!$i){echo '<th>Product Item</th>';}?>
-				<th>Initial estimate of effort</th>
-				<th>Task actions</th>
-			</tr>
-
-			<tr>
-				<?php if($i){ $var = count($data) + 1; echo '<td rowspan="'.$var.'">'.$data[0]->Product->Item.'</td>';} ?></td>
-			</tr>
-			<?php //'.$obj->User->getUserName().'
-				foreach($data as $obj){ ?>
-				<tr>
-				<td><?php echo $obj->Task->Description ?></td>
-				<td ><?php 	foreach ($UserDAO->getAllUserByTaskID($obj->Task->TaskID) as $model) {
-					echo '<a href="#"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
-				} ?></td>
-				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
-				<td><?php echo $obj->Task->TaskEffor; ?></td>
-				<td><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Edit </a> <a href = "#"> Delete </a></td>
-				</tr>
-			<?php }	?>
-		</table>
-		<a href = "#" id = "add-task">Ajout d'une tache</a>
-		<div id = "form-task">
+		</ul>
+	</div>
+ 	<div class="span7" style="margin-left:20px;">
+     	 	<div class="legend" id = "form-task">
+     	 	 <a class="close" onclick="close();"  href="#">&times;</a>
 			<form method="post" action="controller/controller.php">
 				<table class="inscription">
 						<tr>
@@ -113,7 +75,39 @@ else
 				</table>
 			</form>
 		</div>
+	</div>
+	</div>
+	<div class="row">
+		<p><u>Sprint Backlog <?php if($i){echo 'de "<strong>'.$data[0]->Product->Item.'</strong>"';}else echo '<strong>all</strong>'; ?></u></p>
+		<p>	<a href = "#" id = "add-task"><button class="alert alert-info">Ajout d'une tache</button></a></p>
+		<table class="table table-bordered">
+			<tr>
+				<?php if($i){echo '	<th>BackLog product item</th>';}?>
 
+				<th>Sprint task</th>
+				<th>Volunteer</th>
+				<?php if(!$i){echo '<th>Product Item</th>';}?>
+				<th>Initial estimate of effort</th>
+				<th>Task actions</th>
+			</tr>
+
+			<tr>
+				<?php if($i){ $var = count($data) + 1; echo '<td rowspan="'.$var.'">'.$data[0]->Product->Item.'</td>';} ?></td>
+			</tr>
+			<?php //'.$obj->User->getUserName().'
+				foreach($data as $obj){ ?>
+				<tr>
+				<td><?php echo $obj->Task->Description ?></td>
+				<td ><?php 	foreach ($UserDAO->getAllUserByTaskID($obj->Task->TaskID) as $model) {
+					echo '<a href="#"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
+				} ?></td>
+				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
+				<td><?php echo $obj->Task->TaskEffor; ?></td>
+				<td><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Edit </a> <a href = "#"> Delete </a></td>
+				</tr>
+			<?php }	?>
+		</table>
+</div>
 <script type="text/javascript" src="lib/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="lib/js/agile.js"></script>
@@ -127,4 +121,7 @@ $("#multiselect-demo").multiselect({
 	selectedText: "# User(s)"
 });
 $(".alert").alert();
+$(".close").click(function (){
+	$("#form-task").hide();
+});
 </script>

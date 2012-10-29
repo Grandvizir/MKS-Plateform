@@ -16,7 +16,7 @@
 	list-style-type:none;
 }
 .legend:after {
-	content: "legend";
+	content: "Formulaire";
 	position: absolute;
 	top: -1px;
 	left: -1px;

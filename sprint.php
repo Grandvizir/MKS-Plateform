@@ -77,7 +77,14 @@ else
 		<div id = "form-task">
 			<form method="post" action="controller/controller.php">
 				<table class="inscription">
-					<tr>Item : <strong><?php echo $data[0]->Product->Item; ?></strong></tr>
+						<tr>
+						<td><label>Product Item</label></td>
+						<td><select name="product">
+						<?php 	foreach ($ProductDAO->getAllProduct() as $model) {
+							echo '<option value="'.$model->Product->ProductID.'">'.$model->Product->Item.'</option>';
+						} ?>
+						</select></td>
+					</tr>
 					<tr>
 						<td><label>Description</label></td>
 						<td><textarea name="description" type="text"></textarea></td>
@@ -98,7 +105,7 @@ else
 					<tr>
 						<input type="hidden"  name="actionPostAddTask" value="1"/>
 						<input type="hidden"  name="SprintID" value="<?php echo $data[0]->Sprint->SprintID; ?>"/>
-						<input type="hidden"  name="product" value="<?php echo $data[0]->Product->ProductID; ?>"/>
+						<!--input type="hidden"  name="product" value="<?php echo $data[0]->Product->ProductID; ?>"/ -->
 
 						<br/>
 						<td><button type="submit" class="btn btn-primary">Valider mes infos</button></td>

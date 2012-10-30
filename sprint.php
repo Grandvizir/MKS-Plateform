@@ -100,7 +100,7 @@ else
 				<tr>
 				<td><?php echo $obj->Task->Description ?></td>
 				<td ><?php 	foreach ($UserDAO->getAllUserByTaskID($obj->Task->TaskID) as $model) {
-					echo '<a href="#"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
+					echo '<a href="#" rel="tooltip"  id="tooltip" title="'.$model->User->getUserMail().'">'.$model->User->getUserName().'</a> ';
 				} ?></td>
 				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
 				<td><?php echo $obj->Task->TaskEffor; ?></td>
@@ -117,7 +117,7 @@ else
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/select/style.css" />
 <script type="text/javascript">
-$('#tooltip').tooltip('hide');
+$('a[rel=tooltip]').tooltip('hide');
 $("#multiselect-demo").multiselect({
 	selectedText: "# User(s)"
 });

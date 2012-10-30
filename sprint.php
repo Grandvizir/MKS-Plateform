@@ -25,6 +25,7 @@ else
 {
 	$data = $ModelDAO->getAllWithDependency();
 	$i = false;
+	var_dump($data);
 }
 ?>
 <div class="row">
@@ -66,7 +67,7 @@ else
 					</tr>
 					<tr>
 						<input type="hidden"  name="actionPostAddTask" value="1"/>
-						<input type="hidden"  name="SprintID" value="<?php echo $data[0]->Sprint->SprintID; ?>"/>
+						<!-- input type="hidden"  name="SprintID" value="<?php echo $data[0]->Sprint->SprintID; ?>"/ -->
 						<!--input type="hidden"  name="product" value="<?php echo $data[0]->Product->ProductID; ?>"/ -->
 
 						<br/>

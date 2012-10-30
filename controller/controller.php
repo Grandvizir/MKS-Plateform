@@ -5,8 +5,7 @@ if(!empty($_POST['actionPostAddTask']) && $_POST['actionPostAddTask'] == 1)
 
 
 	if(!empty($_POST['description']) && !empty($_POST['Effort'])
-		&& !empty($_POST['user']) && !empty($_POST['product'])
-		&& !empty($_POST['SprintID']))
+		&& !empty($_POST['user']) && !empty($_POST['product']))
 	{
 		include('../model/Model.php');
 		include('../dao/factory/IDaoFactory.php');
@@ -17,7 +16,6 @@ if(!empty($_POST['actionPostAddTask']) && $_POST['actionPostAddTask'] == 1)
 		$model->Task->TaskEffor = $_POST['Effort'];
 		$model->ArrayUser = $_POST['user'];
 		$model->Product->ProductID = $_POST['product'];
-		$model->Sprint->SprintID = $_POST['SprintID'];
 		$taskDAO->addTaskByProductID($model);
 		header("location:../index.php?page=sprint&id=".$_POST['product']);
 	}

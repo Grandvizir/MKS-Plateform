@@ -1,0 +1,30 @@
+
+
+// PRODUCT WHERE ID
+
+- SPRINTID
+- DELETE UserTASK wHERE SPRINTID
+- DELETE TASK WHERE SPRINTID
+- DELETE sprint WHERE SPRINTID 
+- DELETE PRODUCT where PRODUCTID
+
+SELECT SprintId from sprint WHERE ProductID = :pId
+DELETE usertask WHERE SprintID = :sId
+DELETE task where SprintID = :sId
+DELETE sprint where SprintID = :sId
+DELETE product WHERE PorductId = :pId
+
+
+
+
+// TASK where ID
+- DELETE UserTASK wHERE SPRINTID
+ -DELETE TASK WHERE SPRINTID
+ -DELETE sprint WHERE SPRINTID 
+
+
+DELETE usertask WHERE SprintID = :sId
+DELETE task where SprintID = :sId
+DELETE sprint where SprintID = :sId
+
+

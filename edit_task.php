@@ -36,16 +36,35 @@ else
 					<td><input type = "text" name="effort" value = "<?php echo $data->Task->TaskEffor; ?>" /></td>
 				</tr>
 					<tr>
-							<td><label>User : 	<?php 	foreach ($UserDAO->getAllUserByTaskID($id) as $model) {
-								echo '<strong>'.$model->User->getUserName().'</strong> ';
-							} ?> </label></td>
+							<td><label>User : </label></td>
 							<td>
 								<select name="user[]" multiple id="multiselect-demo">
-								<?php 	foreach ($UserDAO->getAllUser() as $model) {
-									echo '<option value="'.$model->User->getUserID().'">'.$model->User->getUserName().'</option>';
+								<?php
+								$usersByTask = $UserDAO->getAllUserByTaskID($id);
+								$i = 0;
+								$tbl = array();
+								foreach ($UserDAO->getAllUser() as $model)
+								{
+									foreach ($UserDAO->getAllUserByTaskID($id) as $usersByTask){
+										array_push($tbl,  $usersByTask->User->getUserID());
+									}
+									if(in_array($model->User->getUserID(), $tbl)){
+										echo '<option selected="selected" value="'.$model->User->getUserID().'">'.$model->User->getUserName().'</option>';
+
+									}
+									else
+											echo '<option value="'.$model->User->getUserID().'">'.$model->User->getUserName().'</option>';
 								} ?>
 								</select>
-							</td>
+							</tr>
+							<tr>
+								<td><label>Status</lable></td>
+								<td><select>
+									<option>A faire</option>
+									<option>En cours</option>
+									<option>Fait</option>
+								</select></td>
+							</tr>
 							<input type="hidden"  name="TaskID" value="<?php echo $id; ?>"/>
 							<input type="hidden"  name="SprintID" value="<?php echo $data->Sprint->SprintID; ?>"/>
 							<input type="hidden"  name="actionPostEditTask" value="1"/>

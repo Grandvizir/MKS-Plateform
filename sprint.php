@@ -25,7 +25,6 @@ else
 {
 	$data = $ModelDAO->getAllWithDependency();
 	$i = false;
-	var_dump($data);
 }
 ?>
 <div class="row">

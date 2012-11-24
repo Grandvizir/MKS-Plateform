@@ -17,10 +17,10 @@ if(!empty($_POST['actionPostAddTask']) && $_POST['actionPostAddTask'] == 1)
 		$model->ArrayUser = $_POST['user'];
 		$model->Product->ProductID = $_POST['product'];
 		$taskDAO->addTaskByProductID($model);
-		header("location:../index.php?page=sprint&id=".$_POST['product']);
+		header("location:../index.php?page=sprint");
 	}
 	else
-		header("location:../index.php");
+		header("location:../index.php?not");
 }
 if(!empty($_POST['actionPostAddProduct']) && $_POST['actionPostAddProduct'] == 1){
 	if(!empty($_POST['item']) && !empty($_POST['detail']) && !empty($_POST['priority']) &&
@@ -99,5 +99,27 @@ if(!empty($_POST['actionPostEditTask']) && $_POST['actionPostEditTask'] == 1){
 	}
 	else
 		header("location:../index.php?page=edit-task&id=".$_POST['TaskID']);
+}
+if(!empty($_POST['validate']) && is_numeric($_POST['validate']) && !empty($_POST['TaskID']))
+{
+	include('../model/Task.php');
+	include('../dao/factory/IDaoFactory.php');
+
+	$daoFactory = IDaoFactory::getInstance();
+	$taskDAO = $daoFactory->getTaskDAO();
+
+	$taskDAO->validateSprintByID($_POST['TaskID'], $_POST['validate']);
+	header("location:../index.php?page=sprint");
+}
+if(!empty($_POST['comment']) && !empty($_POST['TaskID']))
+{
+	include('../model/Task.php');
+	include('../dao/factory/IDaoFactory.php');
+
+	$daoFactory = IDaoFactory::getInstance();
+	$taskDAO = $daoFactory->getTaskDAO();
+	$taskDAO->updateComment($_POST['TaskID'], $_POST['comment']);
+	header("location:../index.php?page=sprint");
+
 }
 ?>

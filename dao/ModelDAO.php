@@ -38,6 +38,9 @@ class ModelDAO
 									$donnees['PRemaining']);
 
 			$model->Task = new Task($donnees['TaskID'], $donnees['TDescription'], $donnees['TEffort']);
+			$model->Task->TaskValidate = $donnees['validate'];
+			$model->Task->EndTime = $donnees['endTime'];
+
 			$model->Sprint = new Sprint($donnees['SprintID']);
 			//$model->User = new User($donnees['UserID'], $donnees['UName'], $donnees['ULastName'], $donnees['UMail']);
 			array_push($array, $model);
@@ -62,6 +65,9 @@ class ModelDAO
 									$donnees['PRemaining']);
 
 			$model->Task = new Task($donnees['TaskID'], $donnees['TDescription'], $donnees['TEffort']);
+			$model->Task->TaskValidate = $donnees['validate'];
+			$model->Task->EndTime = $donnees['endTime'];
+			$model->Task->comment = $donnees['comment'];
 			$model->Sprint = new Sprint($donnees['SprintID']);
 			//$model->User = new User($donnees['UserID'], $donnees['UName'], $donnees['ULastName'], $donnees['UMail'], $donnees['SprintID']);
 			array_push($array, $model);

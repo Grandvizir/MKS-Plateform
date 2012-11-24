@@ -79,7 +79,8 @@ else
 	</div>
 	<div class="row">
 		<p><u>Sprint Backlog <?php if($i){echo 'de "<strong>'.$data[0]->Product->Item.'</strong>"';}else echo '<strong>all</strong>'; ?></u></p>
-		<p>	<a href = "#" id = "add-task"><button class="alert alert-info">Ajout d'une tache</button></a></p>
+		<p>	<a href = "#" id = "add-task"><button class="alert alert-info">Ajout d'une tache</button></a><a href = "test.php" id = "add-task"><button class="alert alert-info">G&eacute;n&eacute;rer le graph</button></a></p>
+
 		<table class="table table-bordered">
 			<tr>
 				<?php if($i){echo '	<th>BackLog product item</th>';}?>
@@ -88,6 +89,8 @@ else
 				<th>Volunteer</th>
 				<?php if(!$i){echo '<th>Product Item</th>';}?>
 				<th>Initial estimate of effort</th>
+				<th>Time for end</th>
+				<th>Time remaining</th>
 				<th>Task actions</th>
 			</tr>
 
@@ -103,7 +106,9 @@ else
 				} ?></td>
 				<?php if(!$i){ echo '<td><a href="index.php?page=sprint&id='.$obj->Product->ProductID.'">'.$obj->Product->Item.'</a></td>';} ?>
 				<td><?php echo $obj->Task->TaskEffor; ?></td>
-				<td><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Edit </a> <a href = "#"> Delete </a></td>
+				<td><?php echo $obj->Task->EndTime; ?></td>
+				<td><?php echo $result = $obj->Task->TaskEffor - $obj->Task->EndTime; ?></td>
+				<td><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Edit </a><a href = "index.php?page=edit-task&id=<?php echo $obj->Task->TaskID; ?>"> Delete </a><a rel="comment" data-placement="bottom" data-content="<form action='controller/controller.php' method='post'><textarea name='comment'><?php if(!empty($obj->Task->comment)) {echo $obj->Task->comment;}?></textarea><input type='hidden' name='TaskID' value='<?php echo $obj->Task->TaskID;  ?>'><input type='submit' value='ok'/></form>" data-original-title="Comment"> Comment </a><a rel="popover" data-placement="bottom" data-content="<form action='controller/controller.php' method='POST'><input type='hidden' name='TaskID' value='<?php echo $obj->Task->TaskID;  ?>'><input class='input-mini' type='text' name='validate'/><input type='submit' value='validate'/></form>" data-original-title="Task validation">Valider</a></td>
 				</tr>
 			<?php }	?>
 		</table>
@@ -124,4 +129,10 @@ $(".alert").alert();
 $(".close").click(function (){
 	$("#form-task").hide();
 });
+
+
+$('a[rel=popover]').popover("hide");
+$('a[rel=comment]').popover("hide");
+
+
 </script>

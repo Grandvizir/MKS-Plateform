@@ -21,6 +21,8 @@ class TaskDAO
 													AND UserID = :uid
 													";
 
+	private static $QUERY_VALIDATE_TASK = "UPDATE task SET validate = 1, endTime = :endTime WHERE TaskID = :tid";
+	private static $QUERY_UPDATE_COMMENT = "UPDATE task SET comment = :comment WHERE TaskID = :tid";
 
 	//TO-DO just one query with begin and rollback
 	public function TaskDAO($daoFactory)
@@ -98,6 +100,30 @@ class TaskDAO
 					'uid' => $i
 					));
 		}
+		$con->commit();
+	}
+
+	public function validateSprintByID($taskID, $hours)
+	{
+		$con = $this->factory->getConnexion();
+		$firstStep = $con->prepare(self::$QUERY_VALIDATE_TASK);
+		$firstStep->execute(array(
+		'endTime' => $hours,
+		'tid' => $taskID
+			));
+	}
+
+	public function updateComment($taskID, $comment)
+	{
+		var_dump($comment);
+		//die;
+		$con = $this->factory->getConnexion();
+		$con->beginTransaction();
+		$firstStep = $con->prepare(self::$QUERY_UPDATE_COMMENT);
+		$firstStep->execute(array(
+		'comment' => $comment,
+		'tid' => $taskID
+			));
 		$con->commit();
 	}
 }
